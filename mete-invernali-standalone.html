@@ -117,7 +117,15 @@ button:focus-visible, .pin:focus-visible { outline: 2px solid var(--ink); outlin
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pt { background: #fff; } }
 :root[data-theme="dark"] .pt { background: #fff; }
 .pt img { display: block; max-width: 100%; width: auto; height: var(--ph, 38px); object-fit: contain; }
-.app.collapsed .partners { display: none; }
+@media (min-width: 861px) {
+  .app { position: relative; }
+  .app.collapsed .partners { display: grid; position: absolute; grid-area: 1 / 1 / -1 / -1; z-index: 600; right: 12px; bottom: 13px; grid-template-columns: repeat(5, 76px); grid-template-rows: 33px; gap: 6px; padding: 6px; box-sizing: border-box; border-radius: 8px; background: color-mix(in srgb, var(--panel) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 6px var(--shadow); }
+  .app.collapsed .pt-l { display: none; }
+  .app.collapsed .attrib { right: auto; left: 192px; bottom: 13px; }
+  .app.collapsed .pt { padding: 2px 4px; border-radius: 5px; }
+  .app.collapsed .pt img { height: calc(var(--ph, 30px) * .62); }
+  .app.collapsed .pt img[style*="auto"] { height: auto; }
+}
 .kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font: 500 11px var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink2); }
 .badge { border: 1px solid var(--ink2); border-radius: 3px; padding: 1px 6px; color: var(--ink); }
 h1 { margin: 10px 0 8px; font: 600 clamp(32px, 3.4vw, 42px)/1 var(--f-display); letter-spacing: -.012em; text-wrap: balance; }
