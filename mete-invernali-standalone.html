@@ -456,11 +456,22 @@ h1 { margin: 10px 0 10px; font-size: clamp(36px, 3.8vw, 48px); letter-spacing: -
 .zhint { position: absolute; z-index: 600; left: 50%; bottom: 16px; transform: translateX(-50%); padding: 6px 13px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 86%, transparent); color: var(--bg); font: 500 12px var(--f-body); white-space: nowrap; opacity: 0; transition: opacity .25s; pointer-events: none; }
 .zhint.on { opacity: 1; }
 html, body { background: var(--lbg); }
+@property --rw { syntax: '<length>'; inherits: true; initial-value: 340px; }
+.chip .l-f { display: none; }
+@media (min-width: 861px) {
+  .app { --rw: clamp(290px, 24vw, 350px); grid-template-columns: var(--lw) minmax(0, 1fr) var(--rw); grid-template-rows: minmax(0, 1fr) auto; grid-template-areas: "top map list" "part map list"; transition: --lw .42s cubic-bezier(.3, .8, .3, 1), --rw .42s cubic-bezier(.3, .8, .3, 1), column-gap .42s cubic-bezier(.3, .8, .3, 1); }
+  .app.collapsed { --rw: 0px; }
+  .top { overflow: auto; min-height: 0; }
+  .list { border-top: 0; padding-left: 2px; }
+  .chips { display: grid; gap: 6px; }
+  .chips .chip { width: 100%; justify-content: flex-start; border-radius: 10px; padding: 6px 12px; font-size: 14px; }
+  .chips .chip .l-s { display: none; }
+  .chips .chip .l-f { display: inline; text-align: left; }
+  .chips .chip em { margin-left: auto; }
+}
 .list { background: var(--lbg); }
 .cols { background: var(--lbg); }
 @media (min-width: 861px) {
-  .app::before { content: ''; position: absolute; z-index: 0; left: 0; top: 0; bottom: 0; width: calc(var(--lw) + 32px); background: var(--lbg); box-sizing: border-box; transition: opacity .3s ease; pointer-events: none; }
-  .app.collapsed::before { opacity: 0; }
   .app .top, .app .list { position: relative; z-index: 1; }
   .app:not(.collapsed) .partners { position: relative; z-index: 1; }
 }
@@ -680,7 +691,7 @@ html, body { background: var(--lbg); }
       var b = document.createElement('button');
       b.type = 'button'; b.className = mini ? 'chip mini' : 'chip'; b.style.setProperty('--c', 'var(--c-' + c + ')');
       b.title = 'Scaletta, ' + CATS[c].sec;
-      b.innerHTML = ic(c) + CATS[c].short + ' <em>' + n + '</em>';
+      b.innerHTML = ic(c) + '<span class="l-s">' + CATS[c].short + '</span><span class="l-f">' + CATS[c].label + '</span> <em>' + n + '</em>';
       b.setAttribute('aria-pressed', state.active[c] ? 'true' : 'false');
       b.addEventListener('click', function () {
         // un clic isola il capitolo (le altre 9 schede si escludono); un secondo clic sull'unica attiva le riattiva tutte
