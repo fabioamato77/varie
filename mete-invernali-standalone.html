@@ -455,10 +455,11 @@ h1 { margin: 10px 0 10px; font-size: clamp(36px, 3.8vw, 48px); letter-spacing: -
 .embed .intro-ui { height: min(100%, 720px); }
 .zhint { position: absolute; z-index: 600; left: 50%; bottom: 16px; transform: translateX(-50%); padding: 6px 13px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 86%, transparent); color: var(--bg); font: 500 12px var(--f-body); white-space: nowrap; opacity: 0; transition: opacity .25s; pointer-events: none; }
 .zhint.on { opacity: 1; }
+html, body { background: var(--lbg); }
 .list { background: var(--lbg); }
 .cols { background: var(--lbg); }
 @media (min-width: 861px) {
-  .app::before { content: ''; position: absolute; z-index: 0; left: 0; top: 0; bottom: 0; width: calc(var(--lw) + 32px); background: var(--lbg); border-right: 1px solid var(--line); box-sizing: border-box; transition: opacity .3s ease; pointer-events: none; }
+  .app::before { content: ''; position: absolute; z-index: 0; left: 0; top: 0; bottom: 0; width: calc(var(--lw) + 32px); background: var(--lbg); box-sizing: border-box; transition: opacity .3s ease; pointer-events: none; }
   .app.collapsed::before { opacity: 0; }
   .app .top, .app .list { position: relative; z-index: 1; }
   .app:not(.collapsed) .partners { position: relative; z-index: 1; }
