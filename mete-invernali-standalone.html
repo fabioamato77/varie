@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <title>Inverno in viaggio</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 /* Layout: colonna sinistra con titolo, filtri ed elenco; mappa Leaflet a destra con scheda di dettaglio sovrapposta. Su telefono: titolo, mappa, elenco. Base cartografica sobria: acque a linee concentriche, rilievi a tratteggio, reticolo. */
 :root {
@@ -37,7 +37,7 @@
   --c-s8: #D9689A;
   --c-s9: #A8793A;
   --c-s10: #C9A227;
-  --f-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --f-display: 'Gill Sans', 'Gill Sans MT', 'Gill Sans Nova', Calibri, 'Trebuchet MS', sans-serif;
   --f-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
@@ -456,6 +456,16 @@ h1 { margin: 10px 0 10px; font-size: clamp(36px, 3.8vw, 48px); letter-spacing: -
 .zhint { position: absolute; z-index: 600; left: 50%; bottom: 16px; transform: translateX(-50%); padding: 6px 13px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 86%, transparent); color: var(--bg); font: 500 12px var(--f-body); white-space: nowrap; opacity: 0; transition: opacity .25s; pointer-events: none; }
 .zhint.on { opacity: 1; }
 html, body { background: var(--lbg); }
+/* tutto cio' che e' in Gill Sans e' in maiuscolo */
+h1, .detail h2, .chip, .tool, .nm b, .grp, .hc-cat, .d-cat, .hc-body b, .intro-title, .intro-cap b, .intro-skip { text-transform: uppercase; letter-spacing: .01em; }
+h1 { letter-spacing: 0; }
+.intro-title { letter-spacing: -.01em; }
+.chip { font-size: 12.5px; }
+.chip.mini { font-size: 11.5px; }
+.nm b { font-size: 14px; }
+.grp { font-size: 13px; }
+.hc-body b { font-size: 15px; }
+.detail h2 { font-size: 24px; }
 @property --rw { syntax: '<length>'; inherits: true; initial-value: 340px; }
 .chip .l-f { display: none; }
 @media (min-width: 861px) {
