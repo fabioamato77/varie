@@ -456,6 +456,12 @@ h1 { margin: 10px 0 10px; font-size: clamp(36px, 3.8vw, 48px); letter-spacing: -
 .zhint { position: absolute; z-index: 600; left: 50%; bottom: 16px; transform: translateX(-50%); padding: 6px 13px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 86%, transparent); color: var(--bg); font: 500 12px var(--f-body); white-space: nowrap; opacity: 0; transition: opacity .25s; pointer-events: none; }
 .zhint.on { opacity: 1; }
 html, body { background: var(--lbg); }
+/* schede dei capitoli: solo icone, colorate se attive, grigie se spente */
+#chips .chip, #chips .chip:hover, #chips .chip[aria-pressed="true"] { border-color: transparent; background: transparent; }
+#chips .chip .ci { width: 17px; height: 17px; opacity: 1; color: color-mix(in srgb, var(--ink2) 42%, var(--lbg)); }
+#chips .chip[aria-pressed="true"] .ci { color: var(--c); }
+#chips .chip { color: var(--ink2); }
+#chips .chip[aria-pressed="true"] { color: var(--ink); }
 /* tutto cio' che e' in Gill Sans e' in maiuscolo */
 h1, .detail h2, .chip, .tool, .nm b, .grp, .hc-cat, .d-cat, .hc-body b, .intro-title, .intro-cap b, .intro-skip { text-transform: uppercase; letter-spacing: .01em; }
 h1 { letter-spacing: 0; }
