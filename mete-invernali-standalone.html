@@ -1671,12 +1671,13 @@ h1 { letter-spacing: 0; }
     return function () { stop = true; cancelAnimationFrame(raf); window.removeEventListener('resize', size); };
   }
 
+  var introCollapsed = false;
   function reveal(animated) {
     map.invalidateSize();
     if (animated && !reduce) {
       map.jump(-52, 14, 3.1);
       refreshMarkers();
-      setTimeout(function () { map.flyToBounds(PB, { padding: [28, 28], duration: 3.2 }); }, 300);
+      setTimeout(function () { map.flyToBounds(PB, { padding: [28, 28], duration: 3.2 }); }, introCollapsed ? 1150 : 300);
     } else {
       refreshMarkers();
     }
@@ -1696,6 +1697,7 @@ h1 { letter-spacing: 0; }
       holder.appendChild(d); els.push(d);
     });
     stopSnow = snow($('snow'));
+    introCollapsed = true; setCollapsed(true); /* durante la presentazione la mappa occupa tutto lo spazio */
     app.setAttribute('inert', '');
 
     var cap = $('cap');
@@ -1721,6 +1723,7 @@ h1 { letter-spacing: 0; }
       $('bar').style.transition = 'width .25s ease'; $('bar').style.width = '100%';
       app.removeAttribute('inert');
       intro.classList.add('out');
+      setTimeout(function () { setCollapsed(false); }, 600); /* a presentazione finita l'elenco si apre */
       reveal(true);
       setTimeout(function () { stopSnow(); if (intro.parentNode) intro.parentNode.removeChild(intro); }, 1000);
     }
