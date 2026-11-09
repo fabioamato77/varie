@@ -425,6 +425,8 @@ h1 { margin: 10px 0 10px; font-size: clamp(36px, 3.8vw, 48px); letter-spacing: -
 .intro-logo { flex: none; width: clamp(104px, 11vw, 150px); height: auto; aspect-ratio: 187 / 40; color: #F3F7FB; filter: drop-shadow(0 1px 12px rgba(3, 9, 20, .5)); }
 
 .intro-skip { font-family: var(--f-display); font-size: 13px; letter-spacing: .01em; }
+
+@media (max-width: 860px) { .app.intro-hold.collapsed .partners { display: none; } }
 @media (max-width: 860px) {
   .app { height: auto; min-height: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; grid-template-areas: "top" "map" "bar" "list" "part"; row-gap: 12px; }
   .map-wrap { height: 72vh; min-height: 480px; }
@@ -1697,7 +1699,7 @@ h1 { letter-spacing: 0; }
       holder.appendChild(d); els.push(d);
     });
     stopSnow = snow($('snow'));
-    introCollapsed = true; setCollapsed(true); /* durante la presentazione la mappa occupa tutto lo spazio */
+    introCollapsed = true; app.classList.add('intro-hold'); setCollapsed(true); /* durante la presentazione la mappa occupa tutto lo spazio */
     app.setAttribute('inert', '');
 
     var cap = $('cap');
@@ -1723,7 +1725,7 @@ h1 { letter-spacing: 0; }
       $('bar').style.transition = 'width .25s ease'; $('bar').style.width = '100%';
       app.removeAttribute('inert');
       intro.classList.add('out');
-      setTimeout(function () { setCollapsed(false); }, 600); /* a presentazione finita l'elenco si apre */
+      setTimeout(function () { app.classList.remove('intro-hold'); setCollapsed(false); }, 600); /* a presentazione finita l'elenco si apre */
       reveal(true);
       setTimeout(function () { stopSnow(); if (intro.parentNode) intro.parentNode.removeChild(intro); }, 1000);
     }
