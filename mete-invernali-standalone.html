@@ -456,6 +456,7 @@ h1 { margin: 10px 0 10px; font-size: clamp(36px, 3.8vw, 48px); letter-spacing: -
 .zhint { position: absolute; z-index: 600; left: 50%; bottom: 16px; transform: translateX(-50%); padding: 6px 13px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 86%, transparent); color: var(--bg); font: 500 12px var(--f-body); white-space: nowrap; opacity: 0; transition: opacity .25s; pointer-events: none; }
 .zhint.on { opacity: 1; }
 html, body { background: var(--lbg); }
+.pt img[style*="auto"] { max-width: 150px; max-height: 52px; object-fit: contain; }
 /* schede dei capitoli: solo icone, colorate se attive, grigie se spente */
 #chips .chip, #chips .chip:hover, #chips .chip[aria-pressed="true"] { border-color: transparent; background: transparent; }
 #chips .chip .ci { width: 17px; height: 17px; opacity: 1; color: color-mix(in srgb, var(--ink2) 42%, var(--lbg)); }
