@@ -1717,6 +1717,7 @@ h1 { letter-spacing: 0; }
     function finish() {
       if (done) return;
       done = true;
+      if (io) { io.disconnect(); io = null; }
       timers.forEach(clearTimeout);
       document.removeEventListener('keydown', onKey);
       $('bar').style.transition = 'width .25s ease'; $('bar').style.width = '100%';
@@ -1732,14 +1733,29 @@ h1 { letter-spacing: 0; }
     $('skip').focus({ preventScroll: true });
 
     show(0);
-    for (var i = 1; i < N; i++) (function (j) { timers.push(setTimeout(function () { show(j); }, j * DUR)); })(i);
-    var bar = $('bar');
-    bar.style.transition = 'width ' + (N * DUR) + 'ms linear';
-    requestAnimationFrame(function () { requestAnimationFrame(function () { bar.style.width = '100%'; }); });
+    /* la presentazione parte solo quando l'area e' visibile (scroll), cosi' chi arriva dopo non se la perde */
+    var started = false, io = null;
+    function begin() {
+      if (started || done) return;
+      started = true;
+      if (io) { io.disconnect(); io = null; }
+      for (var i = 1; i < N; i++) (function (j) { timers.push(setTimeout(function () { show(j); }, j * DUR)); })(i);
+      var bar = $('bar');
+      bar.style.transition = 'width ' + (N * DUR) + 'ms linear';
+      requestAnimationFrame(function () { requestAnimationFrame(function () { bar.style.width = '100%'; }); });
 
-    var minTime = new Promise(function (res) { timers.push(setTimeout(res, N * DUR + 150)); });
-    var fontsReady = (document.fonts && document.fonts.ready) ? Promise.race([document.fonts.ready, new Promise(function (res) { setTimeout(res, 3000); })]) : Promise.resolve();
-    Promise.all([minTime, fontsReady]).then(finish);
+      var minTime = new Promise(function (res) { timers.push(setTimeout(res, N * DUR + 150)); });
+      var fontsReady = (document.fonts && document.fonts.ready) ? Promise.race([document.fonts.ready, new Promise(function (res) { setTimeout(res, 3000); })]) : Promise.resolve();
+      Promise.all([minTime, fontsReady]).then(finish);
+    }
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRect.height >= Math.min(e.boundingClientRect.height * 0.5, 320)) begin();
+        });
+      }, { threshold: [0, 0.1, 0.25, 0.4, 0.55, 0.7, 0.85, 1] });
+      io.observe(intro);
+    } else begin();
   }
 
   fit();
